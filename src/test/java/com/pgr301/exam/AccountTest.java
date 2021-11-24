@@ -16,6 +16,6 @@ public class AccountTest {
         Account a = new Account();
         a.setBalance(balance);
 
-        assertEquals(a.getBalance(), balance + 1);
+        assertEquals(a.getBalance(), balance);
     }
 }
