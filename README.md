@@ -103,7 +103,7 @@ spørringen måles for å kunne se hvor lang tid det tok å få svar (Bilde 4.2)
 
 ![InfluxDB](imgs/bilde4_1.png)
 
-![Grafana](imgs/bilde4_2.jpg)
+![Grafana](imgs/bilde4_2.png)
 
 ## Oppgave - Terraform
 
