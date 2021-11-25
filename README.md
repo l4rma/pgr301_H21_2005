@@ -72,20 +72,38 @@ er automatisert. Feks på samme måte som vist i neste oppgave.
 
 ## Oppgave - Pipline
 
-* 3.1 [ ] Kjører enhetstester
-* 3.2 [ ] Kompilerer koden
-* 3.3 [ ] Bygger artifakt (JAR)
+Fil: .github/workflows/maven.yml
+
+* 3.1 [x] Kjører enhetstester
+* 3.2 [x] Kompilerer koden
+* 3.3 [x] Bygger artifakt (JAR)
 
 ## Oppgave - Feedback
 
-Applikasjonen skal produsere metrics med Micrometer og levere metrics til Influx DB lokalt
+4.1 Applikasjonen skal produsere metrics med Micrometer og levere metrics til Influx DB lokalt
 
-* 4.1 [ ] Lagt til kode som registerer målepunkter i applikasjonen
-* 4.2 [ ] Målepunkt hvor når APIet kaster "BackEndException"
+* [x] Lagt til kode som registerer målepunkter i applikasjonen
 
-Spørringsforslag: ``select * from <metric-name>``
+I DevOps ånd valgte jeg å bruke litt (for mye) tid på å skrive et shell script
+for å sende requester, slik at jeg slapp å gjøre det manuelt igjen og igjen
+eller styre med Postman. Har lagt det med i repo (doTenRequests.sh). 
+Dette kan også brukes av sensor for å gjøre requester under testingen :)
 
-<img src="bilde4.jpg">
+Spørringsforslag til influxDB: 
+```sql
+SELECT * FROM get_account WHERE time > now() - 1h AND count > 0
+SELECT * FROM update_account WHERE time > now() - 1h AND count > 0
+SELECT * FROM transfer_money WHERE time > now() - 1h AND count > 0
+```
+
+Spørringene viser henholdsvis requests til de tre endepunktene gjort siste timen.
+Da det er en egen kolonne "exceptions" kan man veldig lett se hvilke exceptions
+som skjer og når (Bilde 4.1). På Grafana satt jeg opp y-aksen til ms og x-aksen er tidspunkt
+spørringen måles for å kunne se hvor lang tid det tok å få svar (Bilde 4.2).
+
+![InfluxDB](imgs/bilde4_1.png)
+
+![Grafana](imgs/bilde4_2.jpg)
 
 ## Oppgave - Terraform
 
