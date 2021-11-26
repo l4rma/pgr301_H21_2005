@@ -162,24 +162,43 @@ $ aws s3 mb s3://<bucket_navn> --region <region>
 
 Implementer en workflow med GitHub actions som:
 
-* [ ] kjører ``Terraform init & apply`` for hver endring av kode i main branch.
-* [ ] kjører ``Terraform init & plan`` for hver pull request som lages mot main branch
-* [ ] feiler dersom Terraformkode som pushes til main ikke er riktig formatert.
-* [ ] bare kjører dersom det er endringer in ifra/ katalogen.
+* [x] kjører ``Terraform init & apply`` for hver endring av kode i main branch.
+* [x] kjører ``Terraform init & plan`` for hver pull request som lages mot main branch
+* [x] feiler dersom Terraformkode som pushes til main ikke er riktig formatert.
+* [x] bare kjører dersom det er endringer in ifra/ katalogen.
 
 ### 5.6 Forklaring til sensor som vil lage fork
 
-Q: Beskriv hva sensor må gjøre etter han/hun har laget en fork for å få pipeline til å fungere for i sin AWS/gitHub konto.
+Q: Beskriv hva sensor må gjøre etter han/hun har laget en fork for å få
+pipeline til å fungere for i sin AWS/gitHub konto.
+Hvilke verdier må endres i koden?
+Hvilke hemmeligheter må legges inn i repoet. Hvordan gjøres dette?
 
-A: //TODO: skriv svar
-
-Q: Hvilke verdier må endres i koden?
-
-A: //TODO: skriv svar
-
-Q: Hvilke hemmeligheter må legges inn i repoet. Hvordan gjøres dette?
-
-A: //TODO: skriv svar
+A: Først kan sensor endre litt i filene "infra/provider.tf" og
+"infra/ecr\_repo.tf". Evt kan også bucket endres til bucketen sensor lagde 
+fra kommandolinjen tidligere. //TODO: lage variables.tf
+```terraform
+  backend "s3" {
+    bucket = "pgr301-lama003-terraform"
+    key = "<ønsket-filnavn-på-statefil>"
+    region = "eu-west-1"
+  }
+```
+```terraform
+  resource "aws_ecr_repository" "student_repo" {
+    name = "<ønsket-navn-på-ecr-repo>" 
+  }
+```
+Så må sensor legge inn secrets i github repo sitt. Dette gjøres ved å gå inn
+på settings, der sensor var for å fikse branch protection. Men nå må sensor
+trykke på secrets litt lenger ned på menyen til høyre i stedet for branches.
+Her finnes en knapp som sier "New repository secret". Nå er det viktig at 
+sensor ikke har glemt nøkkel-iden og secreten han brukte for å konfigurere
+aws klienten sin da han lagde bucket, for nå trengs de igjen! 
+Klikk på "New repository secret" og legg inn nøkkel-id, viktig at den heter
+``AWS_ACCESS_KEY_ID``, og secret access key som må hete
+``AWS_SECRET_ACCESS_KEY``. Grunnen til at de må hete dette er at det er disse
+navnene som refereres til i ".github/workflows/terraform.yml".
 
 ## Oppgave - Docker
 
