@@ -1,3 +1,6 @@
+[![Java CI](https://github.com/l4rma/pgr301_H21_2005/actions/workflows/maven.yml/badge.svg)](https://github.com/l4rma/pgr301_H21_2005/actions/workflows/maven.yml)
+[![Terraform](https://github.com/l4rma/pgr301_H21_2005/actions/workflows/terraform.yml/badge.svg)](https://github.com/l4rma/pgr301_H21_2005/actions/workflows/terraform.yml)
+
 # Eksamen - DevOps
 PGR301 Høst 2021
 
