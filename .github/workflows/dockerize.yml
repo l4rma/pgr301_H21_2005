@@ -22,8 +22,8 @@ jobs:
         run: |
           aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003
           rev=$(git rev-parse --short HEAD)
-          docker build . -t bankAccount:$rev
-          docker tag bankAccount:$rev 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003/bankAccount:$rev
-          docker tag bankAccount:$rev 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003/bankAccount:latest
-          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003/bankAccount:$rev
-          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003/bankAccount:latest
+          docker build . -t bankaccount:$rev
+          docker tag bankaccount:$rev 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003:$rev
+          docker tag bankaccount:$rev 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003:latest
+          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003:$rev
+          docker push 244530008913.dkr.ecr.eu-west-1.amazonaws.com/lama003:latest
