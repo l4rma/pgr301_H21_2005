@@ -202,30 +202,29 @@ navnene som refereres til i ".github/workflows/terraform.yml".
 
 ## Oppgave - Docker
 
-* [ ] 6.1 Dockerfile (skal både kompilere, bygge og kjøre applikasjonen.
+* [x] 6.1 Dockerfile (skal både kompilere, bygge og kjøre applikasjonen.
 
 Q: Hva vil kommandolinje for å bygge et container image være?
 
-A: ``$ docker build``
+A: ``$ docker build -t <image-navn>``
 
 Q: Hva vil kommando for å starte en container være? Applikasjonen skal lytte på port 7777 på din
 maskin
 
-A: ``$ docker run <image-navn> p7777:8080``
+A: ``$ docker run -p7777:8080 <image-navn>:latest``
 
 Q: Medlemmer av "Team Dino" har av og til behov for å kjøre to ulike versjoner av applikasjonen lokalt på maskinen sin, samtidig .Hvordan kan de gjøre dette uten å få en port-konflikt? Hvilke to kommandoer kan man kjøre for å starte samme applikasjon to ganger, hvor den ene bruker port 7777 og den andre 8888?
 
 A: 
 ```shell
-$ docker run <image-navn> p7777:8080 
-$ docker run <image-navn> p8888:8080
+$ docker run <image-navn> -p7777:8080 
+$ docker run <image-navn> -p8888:8080
 ```
 (Evt kan man skrive alt på en linje med "&&" i mellom)
 //TODO: dobbelt sjekk at man kan kjøre med "&&"
 
 ### 6.2 Lag en GitHub Actions workflow som bygger et Docker image av Spring Boot applikasjonen.
-* [ ] GitHub Workflowen skal kjøres ved hver push til main branch.
-* [ ] Hvert Container image skal ha en unik tag som identifiserer hvilken commit i GitHub som ble brukt som grunnlag for å bygge container image.
-* [ ] Container image skal pushes til ECR repository som ble laget i Terraform oppgaven.
-* [ ] Hvis du ikke har fått til Terraform oppgaven, kan du lage et ECR repository manuelt via AWS console (UI), og du får ikke poengtrekk i denne oppgaven dersom du gjør dette
+* [x] GitHub Workflowen skal kjøres ved hver push til main branch.
+* [x] Hvert Container image skal ha en unik tag som identifiserer hvilken commit i GitHub som ble brukt som grunnlag for å bygge container image.
+* [x] Container image skal pushes til ECR repository som ble laget i Terraform oppgaven.
 
