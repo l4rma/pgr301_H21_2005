@@ -77,9 +77,9 @@ er automatisert. Feks på samme måte som vist i neste oppgave.
 
 Fil: .github/workflows/maven.yml
 
-* 3.1 [x] Kjører enhetstester
-* 3.2 [x] Kompilerer koden
-* 3.3 [x] Bygger artifakt (JAR)
+* [x] 3.1 Kjører enhetstester
+* [x] 3.2 Kompilerer koden
+* [x] 3.3 Bygger artifakt (JAR)
 
 ## Oppgave - Feedback
 
@@ -127,7 +127,7 @@ til å kjøre.
 
 //TODO: Se over legg til litt mer
 
-* 5.2 [x] Lag en S3 bucket i klassens AWS konto
+* [x] 5.2 Lag en S3 bucket i klassens AWS konto
 
 ### 5.3 Hvordan lage bucket fra CLI? 
 Først er sensor nødt til å skaffe seg no nøkler og credentials. For å gjøre
