@@ -15,6 +15,9 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: eu-west-1
     steps:
+      - name: Change Directory
+        run: cd infra/
+
       - name: Checkout
         uses: actions/checkout@v2
 
