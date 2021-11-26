@@ -11,3 +11,5 @@
 /target/
 /infra/.gradle/*
 /infra/.gradle/
+/infra/.terraform/
+/infra/.terraform/*

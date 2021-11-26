@@ -124,13 +124,20 @@ til å kjøre.
 
 //TODO: Se over legg til litt mer
 
-* 5.2 [ ] Lag en S3 bucket i klassens AWS konto
+* 5.2 [x] Lag en S3 bucket i klassens AWS konto
 
 ### 5.3 Hvordan lage bucket fra CLI? 
-Først er sensor nødt til å skaffe seg no nøkler og credentials. For å gjøre dette ...
-//TODO: skriv hvordan skaffe nøkler og credentials
+Først er sensor nødt til å skaffe seg no nøkler og credentials. For å gjøre
+dette må man logge inn på aws console og søke på "IAM". Der vil man på høyre
+siden fine "users", klikk på denne for å se en liste med IAM users. Klikk inn
+på din bruker og videre på "Security Cridentials" og klikk på knappen 
+"Create Access Key". Den finnes rett under der det står at access key brukes
+blandt annet til å logg inn på AWS CLI. Så er det bare å pugge secret access 
+keyen for den vil du ikke få se igjen. Evt kan du laste ned en .csv fil der 
+det står skrevet ned.
 
-Deretter kan sensor konfigurere aws klienten med sin nyanskaffede nøkkel-id og secret access key
+Deretter kan sensor konfigurere aws klienten med sin nyanskaffede nøkkel-id
+og secret access key
 
 ```shell
 $ aws configure
@@ -139,14 +146,14 @@ $ aws configure
 Så er det bare å bruke s3apiet for å lage seg en bøtte:
 
 ```shell 
-$ aws s3api create-bucket --bucket my-bucket --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
+$ aws s3 mb s3://<bucket_navn> --region <region>
 ```
 
-* [ ] 5.3 Bruk S3 backend for state
+* [x] 5.3 Bruk S3 backend for state
 
 ### Terraformkode
 
-* [ ] 5.4 Lag Terraform kode som oppretter ECR repository
+* [x] 5.4 Lag Terraform kode som oppretter ECR repository
 
 ### 5.5 Terraform i pipline
 
