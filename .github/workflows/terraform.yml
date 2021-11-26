@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - main
+    paths:
+      - infra
   pull_request:
+    paths:
+      - infra
 
 jobs:
   terraform:
