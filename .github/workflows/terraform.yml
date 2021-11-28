@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - infra
+      - infra/**
   pull_request:
     paths:
-      - infra
+      - infra/**
 
 jobs:
   terraform:
