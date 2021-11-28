@@ -16,7 +16,7 @@ hindre kode som ikke kompilerer og feilende tester fra å bli integrert i main
 branch.
 
 A: Det første som må gjøres er å sette opp en workflow med github actions.
-Dette gjøres ved å legge til direcoryet .github/workflows. Her oppretter man en
+Dette gjøres ved å legge til directoryet ".github/workflows". Her oppretter man en
 yml-fil med instruksjoner for github actions. Instruksjonene inneholder navn,
 når, hva, hvor, hvordan alt skal gjøres (bilde 1.1). Dette vil på hver push
 bygge applikasjonen og kjøre testene. Github action vil registrere om testen
@@ -25,8 +25,11 @@ Branch Protection Rules trykke add og legge til en "rule" på main som sier
 "Require status checks to pass before merging" (bilde 1.2). Deretter velger man
 bygg, og koden vil nå ikke la seg merge til main hvis testene ikke passerer.
 
-<img src="bilde1_1.jpg">
-<img src="bilde1_2.jpg">
+![yml-fil](imgs/bilde1_1.png)
+bilde 1.1
+
+![Branch protection](imgs/bilde1_2.png)
+bilde 1.2
 
 ### 1.2
 Q: Beskriv med ord eller skjermbilder hvordan GitHub kan konfigureres for å
@@ -35,31 +38,37 @@ merges.
 
 A: For å gjøre dette kan man gå til Settings/Branches og ved "Branch Protection
 Rules" klikk add. Velg "Require a pull request before merging" og "Require
-aoorivaks". Under kan man velge antall approvals som trengs (bilde 2).
+approvals". Under kan man velge antall approvals som trengs (bilde 2).
 
-<img src="bilde2.jpg">
+![Branch protection](imgs/bilde2.png)
+bilde 2
 
 ### 1.3
 Q: Beskriv hvordan arbeidsflyten for hver enkelt utvikler bør være for å få en
 effektiv som mulig utviklingsprosess, spesielt hvordan hver enkelt utvikler bør
 jobbe med Brancher i Github hver gang han eller hun starter en ny oppgave.
 
-A: For at det ikke skal bli rot og kaos som hos SkalBank er det viktig å holde
+A: For at det ikke skal bli rot og kaos, som hos SkalBank, er det viktig å holde
 main branch så clean som mulig. Alt som merges til main bør kjøre tester uten
-feil for ikke å skape problemer på main. Derfor bør man alltid når man skal
-legge til kode først opprette en ny branch, denne bør navngis så det er enkelt
-å forstå hva som jobbes med på branchen. Som med alt i IT er det mange meninger
-om hva som er den beste konvensjonen her er noen eksempler: 
+feil for ikke å skape problemer på main. Derfor bør man alltid, når man skal
+legge til kode, først opprette en ny branch der man kan jobbe. Så kan man ved
+hjelp av en workflow i github actions automatisere bygging og testen, slik
+beskrevet i oppgave 1.1 og kun godta merging dersom testene har passert. Man 
+kan også, som beskrevet i oppgave 1.2, legge til en branch protection som sier 
+at en eller flere person på teamet må godkjenne koden før den kan merges. 
+Da vil sjangsen for uoppdagede feil minske. Brancher bør navngis så det er
+enkelt å forstå hva som jobbes med på branchen. Som med alt i IT er det mange
+meninger om hva som er den beste navn-konvensjonen her er noen eksempler: 
 
 \<gruppe\>/\<branch-navn\> - \<utvikler\>\_\<branch-type\>\_\<branch-navn> - \<branch-type\>/\<branch-navn\>
-```shell
+```
 group1/loginModule
 glenn_wip_exam_grading_automator
 feature/coolButtons
 fix/all_users_get_admin_privliges
 ```
 
-### 2
+### 2 
 Q: SkalBank har bestemt seg for å bruke DevOps som underliggende prinsipp for
 allsystemutvikling i banken. Er fordeling av oppgaver mellom API-teamet og
 "Team Dino"problematisk med dette som utgangspunkt? Hvilke prinsipper er det
@@ -84,14 +93,23 @@ Fil: .github/workflows/maven.yml
 
 ## Oppgave - Feedback
 
-4.1 Applikasjonen skal produsere metrics med Micrometer og levere metrics til Influx DB lokalt
+### 4.1 
+Q: Applikasjonen skal produsere metrics med Micrometer og levere metrics til
+Influx DB lokalt
 
-* [x] Lagt til kode som registerer målepunkter i applikasjonen
+* [x] Lagt til kode som registerer målepunkter i applikasjonen 
+
+Fil: src/main/java/com/pgr301/exam/BankAccountController.java
 
 I DevOps ånd valgte jeg å bruke litt (for mye) tid på å skrive et shell script
 for å sende requester, slik at jeg slapp å gjøre det manuelt igjen og igjen
 eller styre med Postman. Har lagt det med i repo (doRequests.sh). 
 Dette kan også brukes av sensor for å gjøre requester under testingen :)
+
+### 4.2 
+Q: Hvor ofte kaster APIet "BackEndException"? Hvilke spørringer kan sensor 
+gjøre mot InfluxDB for å analysere problemet?
+
 
 Spørringsforslag til influxDB: 
 ```sql
@@ -103,26 +121,41 @@ Measurements: ``get_account`` ``transfer_money`` ``update_account``
 
 Spørringene viser henholdsvis requests til de tre endepunktene gjort siste timen.
 Da det er en egen kolonne "exceptions" kan man veldig lett se hvilke exceptions
-som skjer og når (Bilde 4.1). Jeg la i hver av api-metodene en registrering før
+som skjer og når (Bilde 4.1). Her ser man at ved 10 get kall, var det kun ett 
+som ikke feilet. Med tanke på statistikk er selvfølgelig 10 forsøk en alt for 
+liten prøvemengde, men jeg mener det er nok for å få frem poenget at exceptionen
+skjer **altfor ofte**. 
+
+### 4.3
+Q: Bruk Micrometer rammeverket til å identifisere problemområdet til applikasjonen.
+
+Jeg la i hver av api-metodene en registrering før
 og etter metoden til shaky core system skjer (``..._before_backend`` og 
 ``..._after_backend``), slik at man kan pin pointe om denne mystiske
-BackEndException skjer hos API-teamet eller kjernesystemet. Bilde4\_2 er et
-screenshot fra Grafana der det er gjort 10 kall og man ser at "before" har
-blitt registrert 10 ganger, mens after kun har blitt registrert 3 ganger.
+BackEndException skjer hos API-teamet eller kjernesystemet. Bilde4.2 er et
+screenshot fra Grafana der det er gjort ti kall og man ser at "before" har
+blitt registrert ti ganger, mens after kun har blitt registrert tre ganger.
 _Det vil si at alle feil må ha skjedd et sted i kjernesystemet._
 Det er tid på x-aksen og antall registreringer på y-aksen.
 (Det er ikke verdens beste grafiske fremstilling, men jeg mener det kommer
 ganske tydelig frem hva som skjer). Det ser ikke bra ut for kjernesystem-teamet.
 
+Jeg har valgt å bare kjøre ti kall siden det var enkelt og greit å
+illustrere. Om Jens vil ha det mer nøyaktig er det bare å endre N-verdien i
+shell-scriptet til så mye man vil og kjøre en SQL spørring som summerer antall
+counts av before\_backend og minuse summen av counts av after\_backends for å 
+få antall ganger applikasjonen feilet.
+
 ![InfluxDB](imgs/bilde4_1.png)
+bilde 4.1
 
 ![Grafana](imgs/bilde4_2.png)
+bilde 4.2
 
 ## Oppgave - Terraform
 
-### Drøft:
 
-### 5.1
+### 5.1 Drøft:
 
 Q: Hvorfor funket terraformkoden i dette repoet for "Jens" første gang det ble
 kjørt? Og hvorfor feiler det for alle andre etterpå, inkludert Jens etter at
@@ -135,7 +168,10 @@ prøver å opprette buckets med samme navn. S3 buckets trenger globalt unike
 navn, så de må endre på navnet (i linje 1 som feilmeldingen sier) for å få det
 til å kjøre.
 
-//TODO: Se over legg til litt mer
+Tfstate-filen Jens slettet er liksom hjernen til terraform. Det er denne som
+blir brukt når terraform skal sammenligne terraform koden som blir applyet
+med den faktiske infrastrukturen. Når denne blir slettet ved ikke terraform
+lenger hva som er hva, Og det vil feile. 
 
 * [x] 5.2 Lag en S3 bucket i klassens AWS konto
 
@@ -164,9 +200,9 @@ $ aws s3 mb s3://<bucket_navn> --region <region>
 
 * [x] 5.3 Bruk S3 backend for state
 
-### Terraformkode
+### 5.4 Terraformkode
 
-* [x] 5.4 Lag Terraform kode som oppretter ECR repository
+* [x] Lag Terraform kode som oppretter ECR repository
 
 ### 5.5 Terraform i pipline
 
