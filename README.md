@@ -269,8 +269,6 @@ A:
 $ docker run -p7777:8080 <image-navn> 
 $ docker run -p8888:8080 <image-navn> 
 ```
-(Evt kan man skrive alt på en linje med "&&" i mellom)
-//TODO: dobbelt sjekk at man kan kjøre med "&&"
 
 ### 6.2 Lag en GitHub Actions workflow som bygger et Docker image av Spring Boot applikasjonen.
 * [x] GitHub Workflowen skal kjøres ved hver push til main branch.
