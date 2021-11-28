@@ -6,12 +6,11 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = var.bucket_name
-	key = var.bucket_key
-    region = var.aws_region
+    bucket = "pgr301-lama003-terraform"
+	key = "terraform.state"
+    region = "eu-west-1"
   }
 }
 provider "aws" {
-  region = var.aws_region
+  region = var.aws_region 
 }
-
