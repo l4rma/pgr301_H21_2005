@@ -255,7 +255,7 @@ navnene som refereres til i ".github/workflows/terraform.yml".
 
 Q: Hva vil kommandolinje for å bygge et container image være?
 
-A: ``$ docker build -t <image-navn>``
+A: ``$ docker build -t <image-navn> .``
 
 Q: Hva vil kommando for å starte en container være? Applikasjonen skal lytte på port 7777 på din
 maskin
