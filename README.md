@@ -221,8 +221,8 @@ Hvilke verdier må endres i koden?
 Hvilke hemmeligheter må legges inn i repoet. Hvordan gjøres dette?
 
 A: Først kan sensor endre litt i filene "infra/provider.tf" og
-"infra/ecr\_repo.tf". Evt kan også bucket endres til bucketen sensor lagde 
-fra kommandolinjen tidligere. //TODO: lage variables.tf
+"infra/ecr\_repo.tf". Evt kan det endres i terraform.tfvars og bucket endres 
+til bucketen sensor lagde fra kommandolinjen tidligere. 
 ```terraform
   backend "s3" {
     bucket = "pgr301-lama003-terraform"
