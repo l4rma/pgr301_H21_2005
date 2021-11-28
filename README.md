@@ -74,14 +74,14 @@ allsystemutvikling i banken. Er fordeling av oppgaver mellom API-teamet og
 "Team Dino"problematisk med dette som utgangspunkt? Hvilke prinsipper er det
 som ikke etterleves her? Hva er i så fall konsekvensen av dette?
 
-A: Hva DevOps egentlig er kan være litt vagt, men det handler blandt annet om
-flyt. Det vil si prinsipper som fjerne "waste" i verdikjeden, færrest mulig
-overleveringer og identifisere flaskehalser. Kontinuelig itegrasjon,
-kontinuerlige leveranser og automatiserte tester. Alle disse er prinsipper som
-SkalBank ikke etterlever. Og konsekvensen av endringen til SkalBank er nok
-dessverre at 100+ stillinger (Team Dino) blir overflødige. Det API-teamet vil
-gjøre er å sette opp en pipeline hvor blandt annet bygging og testing av kode
-er automatisert. Feks på samme måte som vist i neste oppgave.
+A: DevOps handler blandt annet om flyt. Det vil si prinsipper som fjerne
+"waste" i verdikjeden, færrest mulig overleveringer og identifisere
+flaskehalser. Kontinuelig itegrasjon, kontinuerlige leveranser og automatiserte
+tester. Alle disse er prinsipper som SkalBank ikke etterlever. Og konsekvensen
+av endringen til SkalBank er nok dessverre at 100+ stillinger (Team Dino) blir
+overflødige. Det API-teamet vil gjøre er å sette opp en pipeline hvor blandt
+annet bygging og testing av kode er automatisert. Feks på samme måte som vist i
+neste oppgave.
 
 ## Oppgave - Pipline
 
@@ -198,6 +198,9 @@ Så er det bare å bruke s3apiet for å lage seg en bøtte:
 $ aws s3 mb s3://<bucket_navn> --region <region>
 ```
 
+Om kommandoen MÅ starte med "aws s3api" slik det står i oppgaven, så fungerer 
+også ``aws s3api create-bucket --bucket <bucket-navn> --region <region>``
+
 * [x] 5.3 Bruk S3 backend for state
 
 ### 5.4 Terraformkode
@@ -263,8 +266,8 @@ Q: Medlemmer av "Team Dino" har av og til behov for å kjøre to ulike versjoner
 
 A: 
 ```shell
-$ docker run <image-navn> -p7777:8080 
-$ docker run <image-navn> -p8888:8080
+$ docker run -p7777:8080 <image-navn> 
+$ docker run -p8888:8080 <image-navn> 
 ```
 (Evt kan man skrive alt på en linje med "&&" i mellom)
 //TODO: dobbelt sjekk at man kan kjøre med "&&"
@@ -273,4 +276,3 @@ $ docker run <image-navn> -p8888:8080
 * [x] GitHub Workflowen skal kjøres ved hver push til main branch.
 * [x] Hvert Container image skal ha en unik tag som identifiserer hvilken commit i GitHub som ble brukt som grunnlag for å bygge container image.
 * [x] Container image skal pushes til ECR repository som ble laget i Terraform oppgaven.
-
