@@ -108,6 +108,7 @@ og etter metoden til shaky core system skjer (``..._before_backend`` og
 BackEndException skjer hos API-teamet eller kjernesystemet. Bilde4\_2 er et
 screenshot fra Grafana der det er gjort 10 kall og man ser at "before" har
 blitt registrert 10 ganger, mens after kun har blitt registrert 3 ganger.
+_Det vil si at alle feil må ha skjedd et sted i kjernesystemet._
 Det er tid på x-aksen og antall registreringer på y-aksen.
 (Det er ikke verdens beste grafiske fremstilling, men jeg mener det kommer
 ganske tydelig frem hva som skjer). Det ser ikke bra ut for kjernesystem-teamet.
