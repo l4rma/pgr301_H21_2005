@@ -89,20 +89,28 @@ Fil: .github/workflows/maven.yml
 
 I DevOps ånd valgte jeg å bruke litt (for mye) tid på å skrive et shell script
 for å sende requester, slik at jeg slapp å gjøre det manuelt igjen og igjen
-eller styre med Postman. Har lagt det med i repo (doTenRequests.sh). 
+eller styre med Postman. Har lagt det med i repo (doRequests.sh). 
 Dette kan også brukes av sensor for å gjøre requester under testingen :)
 
 Spørringsforslag til influxDB: 
 ```sql
-SELECT * FROM get_account WHERE time > now() - 1h AND count > 0
-SELECT * FROM update_account WHERE time > now() - 1h AND count > 0
-SELECT * FROM transfer_money WHERE time > now() - 1h AND count > 0
+SELECT * FROM <measurement> WHERE TIME > NOW() - 1h AND COUNT > 0
 ```
+Measurements: ``get_account`` ``transfer_money`` ``update_account``
+``get_account_after_backend``  ``transfer_money_after_backend``
+``update_account_after_backend``
 
 Spørringene viser henholdsvis requests til de tre endepunktene gjort siste timen.
 Da det er en egen kolonne "exceptions" kan man veldig lett se hvilke exceptions
-som skjer og når (Bilde 4.1). På Grafana satt jeg opp y-aksen til ms og x-aksen er tidspunkt
-spørringen måles for å kunne se hvor lang tid det tok å få svar (Bilde 4.2).
+som skjer og når (Bilde 4.1). Jeg la i hver av api-metodene en registrering før
+og etter metoden til shaky core system skjer (``..._before_backend`` og 
+``..._after_backend``), slik at man kan pin pointe om denne mystiske
+BackEndException skjer hos API-teamet eller kjernesystemet. Bilde4\_2 er et
+screenshot fra Grafana der det er gjort 10 kall og man ser at "before" har
+blitt registrert 10 ganger, mens after kun har blitt registrert 3 ganger.
+Det er tid på x-aksen og antall registreringer på y-aksen.
+(Det er ikke verdens beste grafiske fremstilling, men jeg mener det kommer
+ganske tydelig frem hva som skjer). Det ser ikke bra ut for kjernesystem-teamet.
 
 ![InfluxDB](imgs/bilde4_1.png)
 
