@@ -66,6 +66,11 @@ glenn_wip_exam_grading_automator
 feature/coolButtons
 fix/all_users_get_admin_privliges
 ```
+Det er også viktig med gode commit-meldinger til hver commit. Det vil si at
+meldingen skal kort og enkelt beskrive hva som er gjort i commiten. Det betyr
+at man helst bør jobbe med én ting per commit. Altså en commit kan være 
+_"lagt til x"_ eller _"fikset bug i y"._ Men det bør **ikke** være _"Har lagt til x, y 
+og z, og fikset litt på a og b. C fungerer fremdeles ikke"._
 
 ### 2 
 Q: SkalBank har bestemt seg for å bruke DevOps som underliggende prinsipp for
@@ -176,11 +181,11 @@ lenger hva som er hva, Og det vil feile.
 
 ### 5.3 Hvordan lage bucket fra CLI? 
 Først er sensor nødt til å skaffe seg no nøkler og credentials. For å gjøre
-dette må man logge inn på aws console og søke på "IAM". Der vil man på høyre
+dette må man logge inn på aws console og søke på "IAM". Der vil man på venstre
 siden fine "users", klikk på denne for å se en liste med IAM users. Klikk inn
 på din bruker og videre på "Security Cridentials" og klikk på knappen 
 "Create Access Key". Den finnes rett under der det står at access key brukes
-blandt annet til å logg inn på AWS CLI. Så er det bare å pugge secret access 
+blandt annet til å logg inn på AWS CLI ;). Så er det bare å pugge secret access 
 keyen for den vil du ikke få se igjen. Evt kan du laste ned en .csv fil der 
 det står skrevet ned.
 
@@ -213,7 +218,7 @@ Implementer en workflow med GitHub actions som:
 * [x] kjører ``Terraform init & apply`` for hver endring av kode i main branch.
 * [x] kjører ``Terraform init & plan`` for hver pull request som lages mot main branch
 * [x] feiler dersom Terraformkode som pushes til main ikke er riktig formatert.
-* [x] bare kjører dersom det er endringer in ifra/ katalogen.
+* [x] bare kjører dersom det er endringer i infra-katalogen.
 
 ### 5.6 Forklaring til sensor som vil lage fork
 
@@ -239,14 +244,14 @@ til bucketen sensor lagde fra kommandolinjen tidligere.
 ```
 Så må sensor legge inn secrets i github repo sitt. Dette gjøres ved å gå inn
 på settings, der sensor var for å fikse branch protection. Men nå må sensor
-trykke på secrets litt lenger ned på menyen til høyre i stedet for branches.
+trykke på secrets litt lenger ned på menyen til venstre i stedet for branches.
 Her finnes en knapp som sier "New repository secret". Nå er det viktig at 
-sensor ikke har glemt nøkkel-iden og secreten han brukte for å konfigurere
-aws klienten sin da han lagde bucket, for nå trengs de igjen! 
+sensor ikke har glemt nøkkel-iden og secreten som ble brukt til å konfigurere
+aws klienten da sensor lagde bucket, for nå trengs de igjen! 
 Klikk på "New repository secret" og legg inn nøkkel-id, viktig at den heter
 ``AWS_ACCESS_KEY_ID``, og secret access key som må hete
 ``AWS_SECRET_ACCESS_KEY``. Grunnen til at de må hete dette er at det er disse
-navnene som refereres til i ".github/workflows/terraform.yml".
+navnene som refereres til i ".github/workflows/terraform.yml". 
 
 ## Oppgave - Docker
 
@@ -265,8 +270,8 @@ Q: Medlemmer av "Team Dino" har av og til behov for å kjøre to ulike versjoner
 
 A: 
 ```shell
-$ docker run -p7777:8080 <image-navn> 
-$ docker run -p8888:8080 <image-navn> 
+$ docker run -p7777:8080 <image-navn>:<versjon> 
+$ docker run -p8888:8080 <image-navn>:<versjon>
 ```
 
 ### 6.2 Lag en GitHub Actions workflow som bygger et Docker image av Spring Boot applikasjonen.
