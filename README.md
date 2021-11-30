@@ -5,6 +5,14 @@
 # Eksamen - DevOps
 PGR301 Høst 2021
 
+Jeg har prøvd å lage litt struktur i oppgavebesvarelsen med å legge inn nummer
+på oppgavene. Håper det heller gjør det lettere enn vanskeligere å rette. 
+Beklager også for så sykt mange docker images som har blitt lastet opp. Jeg
+gjorde oppgavene litt hulter i bulter så workflowen til docker ble trigget
+litt oftere enn nødvendig.. :) Var usikker på om jeg hadde lov til å gå inn
+på aws consollen og slette noen manuelt. Men håper at det går greit at det ble 
+litt mange.
+
 ## Oppgave - DevOps
 
 ### Drøft:
