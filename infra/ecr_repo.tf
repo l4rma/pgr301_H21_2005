@@ -1,3 +1,3 @@
 resource "aws_ecr_repository" "student_repo" {
-  name = "lama003" 
+  name = var.ecr_repo_name 
 }
