@@ -16,6 +16,6 @@ public class AccountTest {
         Account a = new Account();
         a.setBalance(balance);
 
-        assertEquals(a.getBalance(),  50f);
+        assertEquals(a.getBalance(),  BigDecimal.valueOf(50));
     }
 }
